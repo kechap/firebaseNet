@@ -119,12 +119,10 @@ namespace FirebaseNet.Messaging
         /// Values in string types are recommended. You have to convert values in objects or other non-string data types (e.g., integers or booleans) to string.
         /// </summary>
         [JsonProperty(PropertyName = "data")]
-        public IDictionary<string, string> Data { get; set; }
+        public object Data { get; set; }
 
         [JsonProperty(PropertyName = "notification")]
         public INotification Notification { get; set; }
         #endregion
-
-
     }
 }
