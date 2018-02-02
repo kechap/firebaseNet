@@ -1,9 +1,42 @@
-[![NuGet version](https://badge.fury.io/nu/firebaseNet.svg)](https://badge.fury.io/nu/firebaseNet)
-
 # firebaseNet
 Client library for Firebase Cloud Messaging (FCM) written in C# / .NET.
 
 This library provides a simple way in pure C# to send messages using the FCM HTTP connection servers. All JSON serialization/deserialization and HTTP related stuff is done automatically for you =).
+
+## About the fork
+
+The original library requires a dictionary to be passed as Data. In many situations this is not the desired behaviour. Now you can do the following.
+
+```c#
+FCMClient client = new FCMClient(ServerApiKey);
+
+var message = new Message()
+{
+    To = "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
+    Data = new MyCustomNotification(Tag, Body, Title)
+};
+
+var result = await client.SendMessageAsync(message);
+```
+
+```c#
+public class MyCustomNotification
+{
+    [JsonProperty("id")]
+    public strint Id { get; set; }
+    
+    [JsonProperty("body")]
+    public strint Body { get; set; }
+    
+    [JsonProperty("title")]
+    public strint Title { get; set; }
+    
+    public MyCustomNotification(string id, string body, string title)
+    {
+        ...
+    }
+}
+```
 
 ## Sending your first message
 
@@ -74,11 +107,10 @@ FCMClient client = new FCMClient(ServerApiKey);
 var message = new Message()
 {
     To = "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
-	Data = new Dictionary<string, string>
+    Data = new MyObject
     {
-        { "Nick", "Mario" },
-        { "body", "great match!" },
-		{ "Room", "PortugalVSDenmark" }
+        user = "johnd",
+	name = "John Doe"
     }
 };
 
