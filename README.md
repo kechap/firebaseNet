@@ -23,13 +23,13 @@ var result = await client.SendMessageAsync(message);
 public class MyCustomNotification
 {
     [JsonProperty("id")]
-    public strint Id { get; set; }
+    public string Id { get; set; }
     
     [JsonProperty("body")]
-    public strint Body { get; set; }
+    public string Body { get; set; }
     
     [JsonProperty("title")]
-    public strint Title { get; set; }
+    public string Title { get; set; }
     
     public MyCustomNotification(string id, string body, string title)
     {
